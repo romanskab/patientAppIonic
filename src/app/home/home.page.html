@@ -1,14 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
-</ion-content>
+  <ion-tab-bar slot="bottom">
+
+    <ion-tab-button tab="my">
+      <ion-icon name="open"></ion-icon>
+      <ion-label>моя сторінка</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="analyzes">
+      <ion-icon name="grid"></ion-icon>
+      <ion-label>аналізи</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="visits">
+      <ion-icon name="grid"></ion-icon>
+      <ion-label>візити</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="record">
+      <ion-icon name="grid"></ion-icon>
+      <ion-label>запис</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="exit()">
+      <ion-icon name="exit"></ion-icon>
+      <ion-label>вихід</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+</ion-tabs>
