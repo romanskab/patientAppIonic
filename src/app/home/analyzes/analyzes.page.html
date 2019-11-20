@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Аналізи</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Дата
+      </ion-col>
+      <ion-col>
+        Назва
+      </ion-col>
+      <ion-col>
+        Результат
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let result of results">
+      <ion-col>
+        {{result.date | date:"dd.MM.yyyy"}}
+      </ion-col>
+      <ion-col>
+        {{result.test.title}}
+      </ion-col>
+      <ion-col>
+        {{result.result}}{{result.test.unit}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

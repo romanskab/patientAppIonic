@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Запис до лікаря</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label>спеціальність</ion-label>
+    <ion-select [(ngModel)]="speciality" interface="popover" (ngModelChange)="getDoctorsBySpecialize()">
+      <ion-select-option *ngFor="let s of specialities" [value]="s">{{s | lowercase}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="doctors">
+    <ion-label>лікар</ion-label>
+    <ion-select [(ngModel)]="doctor" interface="popover" (ngModelChange)="getFreeDaysToDoctor()">
+      <ion-select-option *ngFor="let d of doctors" [value]="d">{{d.surname}} {{d.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="freeDays.length">
+  <ion-label>дата</ion-label>
+  <ion-select [(ngModel)]="day" interface="popover" (ngModelChange)="getFreeVisitsInSelectedDay()">
+    <ion-select-option *ngFor="let d of freeDays" [value]="d">{{d | date:"dd.MM.yyyy"}}</ion-select-option>
+  </ion-select>
+</ion-item>
+
+  <ion-item *ngIf="freeVisitsInSelectedDay.length">
+    <ion-label>час</ion-label>
+    <ion-select [(ngModel)]="selectedVisit" interface="popover">
+      <ion-select-option *ngFor="let visit of freeVisitsInSelectedDay" [value]="visit">{{visit.time}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <div class="ion-padding" *ngIf="selectedVisit">
+    <ion-button expand="block" (click)="recordToDoctor()" type="submit" class="ion-no-margin">Записатись</ion-button>
+  </div>
+
+  <div *ngIf="isError" class="div-error">
+    Запис на прийом не зроблено!!!<br>
+    Спробуйте повторити!!!
+  </div>
+
+  <div *ngIf="isSuccess" class="div-success">
+    Запис на прийом успішний!
+  </div>
+
+</ion-content>

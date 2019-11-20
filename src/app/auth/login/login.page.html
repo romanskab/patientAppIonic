@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Вхід</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form #form="ngForm" (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label position="stacked"> login <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required type="text" name="log" [(ngModel)]="userLog.username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked"> password <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required type="password" name="pass" [(ngModel)]="userLog.password"></ion-input>
+    </ion-item>
+
+    <div class="ion-padding">
+      <ion-button [disabled]="form.invalid" expand="block" type="submit" class="ion-no-margin">Увійти</ion-button>
+    </div>
+  </form>
+
+  <div *ngIf="isError" class="div-error">
+    <b>
+      Логін або пароль невірні!!!
+    </b>
+  </div>
+
+
+
+</ion-content>

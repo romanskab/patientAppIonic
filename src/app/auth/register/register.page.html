@@ -1,0 +1,99 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Реєстрація</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form #form="ngForm" (ngSubmit)="regForm()">
+        <ion-item>
+            <ion-label position="stacked"> Прізвище
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" name="surname" [(ngModel)]="patient.surname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked"> Ім'я
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" name="name" [(ngModel)]="patient.name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked"> По-батькові
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" name="fatherName" [(ngModel)]="patient.fatherName"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked"> email
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="email" name="username" [(ngModel)]="patient.username"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked"> телефон
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="tel" name="phone" [(ngModel)]="patient.phone"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked"> дата народження
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="date" name="dateOfBirth" [(ngModel)]="patient.dateOfBirth"></ion-input>
+        </ion-item>
+
+        <ion-radio-group name="gender" [(ngModel)]="patient.gender">
+            <ion-list-header>
+                <ion-label>Стать</ion-label>
+            </ion-list-header>
+            <ion-item>
+                <ion-label>чол.</ion-label>
+                <ion-radio slot="start" value="MALE" checked></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label>жін.</ion-label>
+                <ion-radio slot="start" value="FEMALE"></ion-radio>
+            </ion-item>
+        </ion-radio-group>
+
+        <ion-item>
+            <ion-label position="stacked"> пароль
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required minlength="2" type="password" name="password"
+                       [(ngModel)]="patient.password"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked"> підтвердження пароля
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required minlength="2" type="password" name="passValid" [(ngModel)]="passValid"></ion-input>
+        </ion-item>
+
+        <div class="ion-padding">
+            <ion-button [disabled]="!(form.valid && patient.password==passValid)"
+                        expand="block"
+                        type="submit"
+                        class="ion-no-margin">
+                Зареєструватись
+            </ion-button>
+        </div>
+
+    </form>
+
+    <div *ngIf="isError" class="div-error">
+        Пацієнта не зареєстровано!!!<br>
+        Пацієнт з такою електронною поштою вже існує!!!
+    </div>
+
+    <div *ngIf="isSuccess" class="div-success">
+        Реєстрація успішна!
+    </div>
+</ion-content>
