@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PatientService} from '../../services/patient.service';
 import {Patient} from '../../models/Patient';
+import {ConfigService} from '../../services/config.service';
 
 @Component({
     selector: 'app-my',
@@ -9,23 +10,24 @@ import {Patient} from '../../models/Patient';
 })
 export class MyPage implements OnInit {
     currentPatient: Patient = new Patient();
-    pathToImage;
+    pathToImage = '';
 
-    constructor(private patientService: PatientService) {
+    constructor(private patientService: PatientService,
+                private config: ConfigService) {
     }
+
+    private baseURL = this.config.api;
 
     ngOnInit() {
         this.patientService.getCurrentPatient().subscribe(value => {
             console.log(value);
             this.currentPatient = value;
-            this.patientService.currentPatientSubject.next(value);
-
-            if (this.currentPatient.image === null) {
+            if (this.currentPatient.image == null) {
                 this.pathToImage = 'assets/images/photo_patient_default.jpg';
             } else {
-                this.pathToImage = 'http://localhost:8080/images/' + this.currentPatient.image;
+                this.pathToImage = `${this.baseURL}/images/` + this.currentPatient.image;
             }
-
+            this.patientService.currentPatientSubject.next(value);
         });
     }
 

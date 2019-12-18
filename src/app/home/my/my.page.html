@@ -1,19 +1,19 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Моя сторінка</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Моя сторінка</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
-    <img *ngIf="currentPatient.image" [src]="pathToImage"/>
-    <ion-card-header>
-      <ion-card-title>{{currentPatient.surname}} {{currentPatient.name}} {{currentPatient.fatherName}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Телефон: {{currentPatient.phone}}</p>
-      <p>Дата народження: {{currentPatient.dateOfBirth | date:"dd.MM.yyyy"}}р.</p>
-      <p>Ел.пошта: {{currentPatient.username}}</p>
-    </ion-card-content>
-  </ion-card>
+<ion-content *ngIf="currentPatient">
+    <ion-card>
+        <img  [src]="pathToImage" alt=""/>
+        <ion-card-header>
+            <ion-card-title>{{currentPatient.surname}} {{currentPatient.name}} {{currentPatient.fatherName}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <p>Телефон: {{currentPatient.phone}}</p>
+            <p>Дата народження: {{currentPatient.dateOfBirth | date:"dd.MM.yyyy"}}р.</p>
+            <p>Ел.пошта: {{currentPatient.username}}</p>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

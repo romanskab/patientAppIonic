@@ -5,25 +5,31 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {TestResult} from '../models/TestResult';
 import {Visit} from '../models/Visit';
 import {Doctor} from '../models/Doctor';
+import {ConfigService} from './config.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PatientService {
-    private URLSavePatient = 'http://localhost:8080/save/patient';
-    private URLGetCurrentPatient = 'http://localhost:8080/patient/current';
-    private URLGetAllTestResults = 'http://localhost:8080/patient/testResults';
-    private URLGetAllFinishedVisits = 'http://localhost:8080/patient/visits/finished';
-    private URLGetSpecialities = 'http://localhost:8080/specialities';
-    private URLGetDoctorsBySpeciality = 'http://localhost:8080/patient/doctors/spec';
-    private URLGetFreeVisitToDoctor = 'http://localhost:8080/patient/freeVisitToDoctor';
-    private URLRecordToDoctor = 'http://localhost:8080/patient/recordToDoctor';
+
+    constructor(private http: HttpClient,
+                private config: ConfigService) {
+    }
+
+    private baseURL = this.config.api;
+    private patientURL = this.config.api + '/patient';
+
+    private URLSavePatient = `${this.baseURL}/save/patient`;
+    private URLGetSpecialities = `${this.baseURL}/specialities`;
+    private URLGetCurrentPatient = `${this.patientURL}/current`;
+    private URLGetAllTestResults = `${this.patientURL}/testResults`;
+    private URLGetAllFinishedVisits = `${this.patientURL}/visits/finished`;
+    private URLGetDoctorsBySpeciality = `${this.patientURL}/doctors/spec`;
+    private URLGetFreeVisitToDoctor = `${this.patientURL}/freeVisitToDoctor`;
+    private URLRecordToDoctor = `${this.patientURL}/recordToDoctor`;
 
     // @ts-ignore
     currentPatientSubject = new BehaviorSubject();
-
-    constructor(private http: HttpClient) {
-    }
 
     save(patient: Patient) {
         console.log(patient);
